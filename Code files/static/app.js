@@ -18,13 +18,12 @@ function fectchvariables(vnum) {
   }
 
 // In this section is the table
-
-funtion charts(sample) {
+function charts(sample) {
     d3.json("samples.json").then((data) => {
-        var samples= data.samples;
-        var resultsarray= samples.filter(sampleobject => 
+        var samples = data.samples;
+        var resultsarray = samples.filter(sampleobject => 
             sampleobject.id == sample);
-        var result= resultsarray[0];
+        var result = resultsarray[0]
         var ids = result.otu_ids;
         var labels = result.otu_labels;
         var values = result.sample_values;
@@ -77,8 +76,7 @@ funtion charts(sample) {
 }
 
 // section for the dropdown that's going to be added
-
-funtion init() {
+function init() {
     var section = d3.select('#selDataset');
 // adds the info to the table
 d3.json("samples.json").then((data) => {
