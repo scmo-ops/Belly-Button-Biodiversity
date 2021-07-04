@@ -49,50 +49,31 @@ funtion charts(sample) {
         };
 
         Plotly.newPlot('bar', data_Bchart, layout_bar);
+
+        // Bubble chart
+
+        var data_BBchart = [
+            {
+                x:ids,
+                y: values,
+                text: labels,
+                mode: 'markers',
+                marker: {
+                    color: ids,
+                    size: values
+                }
+            }
+        ];
+
+        var layout_bubble = {
+            //margin: { t:0},
+            xaxis: {title: 'OTU ID'},
+            hovermode: 'closest',
+            title: 'Bubble chart of OTUs'
+        };
+
+        Plotly.newPlot('bubble', data_BBchart, layout_bubble);
     });
 }
 
-// this section reads the data from the json file
-
-d3.json("data/data.json").then((importedata) => {
-    // console.log(importedData);
-    var data = importedata;
-  
-    data.sort(function(a, b) {
-      return parseFloat(b.greekSearchResults) - parseFloat(a.greekSearchResults);
-    });
-  
-    // Slice the first 10 objects for plotting
-    data = data.slice(0, 10);
-  
-    // Reverse the array due to Plotly's defaults
-    data = data.reverse();
-  
-    // Trace1 for the Greek Data
-    var trace1 = {
-      x: data.map(row => row.greekSearchResults),
-      y: data.map(row => row.greekName),
-      text: data.map(row => row.greekName),
-      name: "Greek",
-      type: "bar",
-      orientation: "h"
-    };
-  
-    // data
-    var chartData = [trace1];
-  
-    // Apply the group bar mode to the layout
-    var layout = {
-      title: "Greek gods search results",
-      margin: {
-        l: 100,
-        r: 100,
-        t: 100,
-        b: 100
-      }
-    };
-  
-    // Render the plot to the div tag with id "plot"
-    Plotly.newPlot("plot", chartData, layout);
-  });
   
