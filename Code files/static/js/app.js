@@ -1,4 +1,4 @@
-// Fetching the variables from the big json file
+// Fetching the variable IDS from the big json file
 
 function fectchvariables(vnum) {
     d3.json("samples.json").then((data) => {
@@ -8,20 +8,49 @@ function fectchvariables(vnum) {
       var result= numarray[0];
 
       // insert in html
-      
+
       var panel = d3.select("#sample-metadata");
       panel.html("");
       Object.entries(result).forEach(([key, value]) => {
         panel.append("h6").text(`${key}: ${value}`);
       });
-  
-    //buildGauge(result.wfreq)
-  
-  
-  
     });
   }
 
+// In this section is the table
+
+funtion charts(sample) {
+    d3.json("samples.json").then((data) => {
+        var samples= data.samples;
+        var resultsarray= samples.filter(sampleobject => 
+            sampleobject.id == sample);
+        var result= resultsarray[0]
+        var ids = result.otu_ids;
+        var labels = result.otu_labels;
+        var values = result.sample_values;
+
+        // now we build a bar chart and a bubble chart using the data
+
+        // Bar chart
+
+        var data_Bchart = [
+            {
+                y:ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
+                x:values.slice(0,10).reverse(),
+                text:labels.slice(0,10).reverse(),
+                type:"bar",
+                orientation:"h"
+            }
+        ];
+
+        var layout_bar = {
+            title: 'Top ten bacteria found in pacient'
+            //margin: { t:30, l:150}
+        };
+
+        Plotly.newPlot('bar', data_Bchart, layout_bar);
+    });
+}
 
 // this section reads the data from the json file
 
