@@ -1,9 +1,14 @@
-function buildMetadata(sample) {
+// Fetching the variables from the big json file
+
+function fectchvariables(vnum) {
     d3.json("samples.json").then((data) => {
       var metadata= data.metadata;
-      var resultsarray= metadata.filter(sampleobject => 
-        sampleobject.id == sample);
-      var result= resultsarray[0]
+      var numarray= metadata.filter(sampleobject => 
+        sampleobject.id == vnum);
+      var result= numarray[0];
+
+      // insert in html
+      
       var panel = d3.select("#sample-metadata");
       panel.html("");
       Object.entries(result).forEach(([key, value]) => {
