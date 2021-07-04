@@ -80,7 +80,7 @@ funtion charts(sample) {
 
 funtion init() {
     var section = d3.select('#selDataset');
-// Use the list of sample names to populate the select options
+// adds the info to the table
 d3.json("samples.json").then((data) => {
     var sampleNames = data.names;
     sampleNames.forEach((sample) => {
@@ -90,7 +90,7 @@ d3.json("samples.json").then((data) => {
         .property("value", sample);
     });
   
-    // Use the first sample from the list to build the initial plots
+    // this add the top 10 results to the charts
     const firstSample = sampleNames[0];
     buildCharts(firstSample);
     buildMetadata(firstSample);
