@@ -24,7 +24,7 @@ funtion charts(sample) {
         var samples= data.samples;
         var resultsarray= samples.filter(sampleobject => 
             sampleobject.id == sample);
-        var result= resultsarray[0]
+        var result= resultsarray[0];
         var ids = result.otu_ids;
         var labels = result.otu_labels;
         var values = result.sample_values;
@@ -84,23 +84,18 @@ funtion init() {
 d3.json("samples.json").then((data) => {
     var sampleNames = data.names;
     sampleNames.forEach((sample) => {
-      selector
-        .append("option")
-        .text(sample)
-        .property("value", sample);
+      selector.append("option").text(sample).property("value", sample);
     });
-  
     // this add the top 10 results to the charts
     const firstSample = sampleNames[0];
-    buildCharts(firstSample);
-    buildMetadata(firstSample);
+    charts(firstSample);
+    fectchvariables(firstSample);
   });
   }
   
 function optionChanged(newSample) {
- // Fetch new data each time a new sample is selected
-buildCharts(newSample);
-buildMetadata(newSample);
+    charts(newSample);
+    fectchvariables(newSample);
 }
 
 init();
