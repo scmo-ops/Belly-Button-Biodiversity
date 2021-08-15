@@ -50,4 +50,24 @@ function charts(id) {
         var labels = samples.otu_labels.slice(0, 10).reverse();
         console.log("labels: " + labels);
   
+        // Trace variables
+        var trace = {
+            x: sampleValue,
+            y: OTU_id,
+            text: labels,
+            marker: {
+              color: 'Blue'},
+            type:"bar",
+            orientation: "h",
+        };
+  
+        // Join the data to the trace variables
+        var data = [trace];
+
+        ////// Section for the charts //////
+  
+  
+        // Bar chats
+        chartsly.newcharts("bar", data);
+      
         
