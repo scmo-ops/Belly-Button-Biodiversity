@@ -34,4 +34,20 @@ function charts(id) {
         frecuencies = frecuencies.frecuencies;
         console.log("Washing Freq: " + frecuencies);
         
+        // filter samples+ values by id 
+        var samples = data.samples.filter(s => s.id.toString() === id)[0];
+        
+  
+        // Top 10 samples and top 10 with the OTU id's
+        var sampleValue = samples.sample_values.slice(0, 10).reverse();
+        console.log("Best samples: " + sampleValue);
+  
+        var OTU = (samples.otu_ids.slice(0, 10)).reverse();
+        
+        var OTU_id = OTU.map(d => "OTU " + d)
+  
+        // get the top 10 labels for the charts and reversing it.
+        var labels = samples.otu_labels.slice(0, 10).reverse();
+        console.log("labels: " + labels);
+  
         
