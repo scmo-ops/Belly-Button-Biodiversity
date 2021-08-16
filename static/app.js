@@ -4,6 +4,7 @@
 function fetchVariables(id){
     d3.json("samples.json").then((data)=> {
         var metadata = data.metadata;
+        console.log(metadata)
 
         // Filtering the data by ID
 
@@ -132,7 +133,6 @@ function charts(id) {
 function init() {
     //read the data
     d3.json("samples.json").then((data)=> {
-        //console.log(data);
 
         //get the name id to the dropdown menu
         data.names.forEach((name) => {
